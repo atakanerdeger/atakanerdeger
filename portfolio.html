@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolyo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#fafaf8;--fg:#1a1a18;--muted:#8a8a82;--accent:#2d2d2a;
+    --line:#e8e8e4;--card:#ffffff;--highlight:#c9ff57;--highlight-dim:#e8ffb3;--radius:14px;
+  }
+  html{scroll-behavior:smooth;font-size:16px}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--fg);line-height:1.7;font-weight:400;overflow-x:hidden}
+  ::selection{background:var(--highlight);color:var(--fg)}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);background:rgba(250,250,248,.82);border-bottom:1px solid var(--line);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+  .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:18px 40px}
+  .logo{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;letter-spacing:-.02em;text-decoration:none;color:var(--fg)}
+  .logo span{color:var(--muted);font-style:italic;font-weight:400;margin-left:4px}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:.88rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;position:relative;transition:color .3s}
+  .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--fg);transition:width .3s cubic-bezier(.22,1,.36,1)}
+  .nav-links a:hover{color:var(--fg)}
+  .nav-links a:hover::after{width:100%}
+  .menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
+  .menu-btn span{display:block;width:22px;height:2px;background:var(--fg);margin:5px 0;transition:.3s}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;padding:140px 40px 80px;max-width:1200px;margin:0 auto;position:relative}
+  .hero-content{max-width:720px}
+  .hero-roles{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;animation:fadeUp .8s ease both}
+  .hero-role{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;font-size:.82rem;font-weight:500;letter-spacing:.02em;border:1px solid var(--line);color:var(--accent);background:var(--card)}
+  .hero-role .role-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .role-gametric .role-dot{background:#6366f1}
+  .role-initium .role-dot{background:#f59e0b}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,4.8rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;margin-bottom:24px;animation:fadeUp .8s ease .1s both}
+  .hero h1 em{font-style:italic;font-weight:400;background:linear-gradient(120deg,var(--highlight-dim) 0%,transparent 100%);padding:0 6px}
+  .hero p{font-size:1.15rem;color:var(--muted);max-width:520px;margin-bottom:40px;animation:fadeUp .8s ease .2s both}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;animation:fadeUp .8s ease .3s both}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;text-decoration:none;transition:all .35s cubic-bezier(.22,1,.36,1);cursor:pointer;border:none}
+  .btn-primary{background:var(--fg);color:var(--bg)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.15)}
+  .btn-outline{background:transparent;color:var(--fg);border:1.5px solid var(--line)}
+  .btn-outline:hover{border-color:var(--fg)}
+  .hero-decoration{position:absolute;right:40px;top:50%;transform:translateY(-50%);width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,var(--highlight-dim) 0%,transparent 70%);opacity:.5;pointer-events:none;animation:float 8s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(-53%) scale(1.05)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+  /* SECTIONS */
+  section{padding:100px 40px}
+  .container{max-width:1200px;margin:0 auto}
+  .section-label{font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;letter-spacing:-.02em;margin-bottom:56px;line-height:1.2}
+
+  /* WORKS */
+  #calismalarim{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .works-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+
+  /* YouTube */
+  .yt-card{display:block;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg);transition:all .45s cubic-bezier(.22,1,.36,1)}
+  .yt-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.07);border-color:transparent}
+  .yt-embed-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#111}
+  .yt-embed-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+  .yt-info{padding:24px 28px 28px}
+  .yt-channel-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .yt-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#ff6b35,#ffa234);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+  .yt-info h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;letter-spacing:-.01em}
+  .yt-handle{font-size:.8rem;color:var(--muted);margin-top:2px}
+  .yt-desc{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:16px}
+  .yt-cta{font-size:.85rem;font-weight:600;color:var(--fg);display:inline-flex;align-items:center;gap:6px;transition:gap .3s}
+  .yt-card:hover .yt-cta{gap:12px}
+
+  /* App Store */
+  .app-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg);transition:all .45s cubic-bezier(.22,1,.36,1)}
+  .app-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.07);border-color:transparent}
+  .app-preview{padding-bottom:56.25%;position:relative;overflow:hidden;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 50%,#16213e 100%)}
+  .app-preview-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+  .phone-mock{width:80px;height:140px;border-radius:16px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);position:relative;display:flex;align-items:center;justify-content:center}
+  .phone-notch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:28px;height:6px;border-radius:4px;background:rgba(255,255,255,.1)}
+  .phone-screen{width:56px;height:96px;border-radius:8px;background:linear-gradient(180deg,rgba(99,102,241,.3) 0%,rgba(139,92,246,.2) 100%);display:flex;align-items:center;justify-content:center}
+  .phone-screen span{font-size:1.6rem}
+  .app-shimmer{position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.03) 50%,transparent 70%);animation:shimmer 3s ease-in-out infinite}
+  @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+  .app-soon-badge{position:absolute;top:16px;right:16px;padding:6px 14px;border-radius:100px;background:rgba(255,255,255,.1);backdrop-filter:blur(12px);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+  .app-info{padding:24px 28px 28px}
+  .app-store-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
+  .apple-icon{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--fg);color:var(--bg);font-size:.9rem}
+  .app-store-text{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .app-info h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+  .app-info p{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:16px}
+  .app-notify{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;border:1.5px dashed var(--line);font-size:.82rem;font-weight:500;color:var(--muted);cursor:default;transition:all .3s}
+  .app-notify:hover{border-color:var(--fg);color:var(--fg)}
+
+  /* EXPERIENCE */
+  #deneyim{background:var(--bg)}
+  .timeline{position:relative;padding-left:32px}
+  .timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:var(--line)}
+  .timeline-item{margin-bottom:48px;position:relative}
+  .timeline-item:last-child{margin-bottom:0}
+  .timeline-dot{position:absolute;left:-32px;top:8px;width:15px;height:15px;border-radius:50%;border:2px solid var(--line);background:var(--bg);transition:border-color .3s}
+  .timeline-item:hover .timeline-dot{border-color:var(--fg)}
+  .timeline-date{font-size:.8rem;color:var(--muted);font-weight:500;margin-bottom:4px}
+  .timeline-item h3{font-size:1.1rem;font-weight:600;margin-bottom:2px}
+  .timeline-item h4{font-size:.9rem;color:var(--muted);font-weight:400;font-style:italic;margin-bottom:10px}
+  .timeline-item p{font-size:.92rem;color:var(--muted);max-width:600px;line-height:1.7}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .contact-links{display:flex;flex-direction:column;gap:16px}
+  .contact-link{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--fg);padding:18px 24px;border:1px solid var(--line);border-radius:var(--radius);transition:all .3s}
+  .contact-link:hover{border-color:var(--fg);transform:translateX(4px)}
+  .contact-link .c-icon{width:40px;height:40px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .contact-link .c-label{font-size:.78rem;color:var(--muted);display:block}
+  .contact-link .c-value{font-weight:500;font-size:.95rem}
+  .contact-form{display:flex;flex-direction:column;gap:16px}
+  .form-group{display:flex;flex-direction:column;gap:6px}
+  .form-group label{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .form-group input,.form-group textarea{padding:14px 18px;border:1px solid var(--line);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.92rem;background:var(--card);color:var(--fg);outline:none;transition:border-color .3s;resize:vertical}
+  .form-group input:focus,.form-group textarea:focus{border-color:var(--fg)}
+  .form-group textarea{min-height:120px}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:40px;text-align:center;font-size:.82rem;color:var(--muted)}
+  footer a{color:var(--fg);text-decoration:none}
+
+  /* ANIMATIONS */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .hero{padding:120px 24px 60px}
+    section{padding:72px 24px}
+    .works-grid,.contact-grid{grid-template-columns:1fr;gap:24px}
+    .hero-decoration{display:none}
+    .nav-inner{padding:16px 24px}
+  }
+  @media(max-width:480px){
+    .hero-actions{flex-direction:column}
+    .btn{width:100%;justify-content:center}
+    .hero-roles{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">ad<span>.dev</span></a>
+    <ul class="nav-links">
+      <li><a href="#calismalarim">Çalışmalarım</a></li>
+      <li><a href="#deneyim">Deneyim</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+    </ul>
+    <button class="menu-btn" onclick="this.classList.toggle('open')" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-roles">
+      <div class="hero-role role-gametric"><span class="role-dot"></span>Co-Founder @ Gametric Labs</div>
+      <div class="hero-role role-initium"><span class="role-dot"></span>Co-Founder @ Initium Studio</div>
+    </div>
+    <h1>Merhaba, ben<br><em>Adınız Soyadınız.</em></h1>
+    <p>Temiz kod ve zarif arayüzlerle dijital deneyimler tasarlayan bir yazılım geliştiriciyim. Kullanıcı odaklı, performanslı ve ölçeklenebilir çözümler üretiyorum.</p>
+    <div class="hero-actions">
+      <a href="#calismalarim" class="btn btn-primary">Çalışmalarımı Gör ↓</a>
+      <a href="#iletisim" class="btn btn-outline">İletişime Geç</a>
+    </div>
+  </div>
+  <div class="hero-decoration"></div>
+</section>
+
+<!-- ÇALIŞMALARIM -->
+<section id="calismalarim">
+  <div class="container">
+    <p class="section-label reveal">Projeler</p>
+    <h2 class="section-title reveal">Çalışmalarım.</h2>
+
+    <div class="works-grid">
+
+      <!-- YouTube Kanalı -->
+      <div class="yt-card reveal">
+        <div class="yt-embed-wrap">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=UU" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="Campfire Study YouTube"></iframe>
+        </div>
+        <div class="yt-info">
+          <div class="yt-channel-header">
+            <div class="yt-avatar">🔥</div>
+            <div>
+              <h3>Campfire Study</h3>
+              <p class="yt-handle">@Campfire_Study</p>
+            </div>
+          </div>
+          <p class="yt-desc">YouTube kanalımda çalışma müzikleri, lo-fi ve ambiyans içerikleri paylaşıyorum.</p>
+          <a href="https://www.youtube.com/@Campfire_Study" target="_blank" style="text-decoration:none">
+            <span class="yt-cta">Kanala Git →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- App Store Yakında -->
+      <div class="app-card reveal">
+        <div class="app-preview">
+          <div class="app-preview-inner">
+            <div class="phone-mock">
+              <div class="phone-notch"></div>
+              <div class="phone-screen"><span>🚀</span></div>
+            </div>
+          </div>
+          <div class="app-shimmer"></div>
+          <div class="app-soon-badge">Yakında</div>
+        </div>
+        <div class="app-info">
+          <div class="app-store-badge">
+            <div class="apple-icon">
+              <svg width="14" height="17" viewBox="0 0 14 17" fill="currentColor"><path d="M13.1 11.8c-.3.7-.5 1-.9 1.6-.6.8-1.4 1.9-2.4 1.9-.9 0-1.2-.6-2.4-.6-1.3 0-1.6.6-2.5.6-1 .1-1.8-1-2.4-1.8C1.1 11.5.4 8.7 1.1 6.8c.5-1.3 1.4-2.2 2.5-2.2 1.1 0 1.8.6 2.7.6.9 0 1.4-.6 2.7-.6.9 0 1.9.5 2.5 1.4-2.2 1.2-1.8 4.3.6 5.1zM9.5 3c.5-.6.8-1.5.7-2.3-.7 0-1.5.5-2 1.1-.4.5-.8 1.4-.7 2.3.8 0 1.5-.5 2-1.1z"/></svg>
+            </div>
+            <span class="app-store-text">App Store</span>
+          </div>
+          <h3>Uygulama Yakında Yayında</h3>
+          <p>Apple App Store'da yayınlanacak uygulamamız son aşamada. Detaylar çok yakında burada paylaşılacak.</p>
+          <div class="app-notify"><span>🔔</span> Haberdar Ol</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="deneyim">
+  <div class="container">
+    <p class="section-label reveal">Deneyim</p>
+    <h2 class="section-title reveal">Profesyonel yolculuğum.</h2>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">Günümüz</p>
+        <h3>Co-Founder</h3>
+        <h4>Gametric Labs</h4>
+        <p>Oyun ve interaktif deneyimler geliştiren Gametric Labs'ın kurucu ortağı olarak ürün stratejisi ve teknik altyapıdan sorumluyum.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">Günümüz</p>
+        <h3>Co-Founder</h3>
+        <h4>Initium Studio</h4>
+        <p>Dijital ürünler ve yaratıcı projeler geliştiren Initium Studio'nun kurucu ortağıyım. Tasarımdan geliştirmeye kadar tüm süreçleri yönetiyorum.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="iletisim">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <p class="section-label reveal">İletişim</p>
+        <h2 class="section-title reveal">Birlikte çalışalım.</h2>
+        <p class="reveal" style="color:var(--muted);font-size:1.05rem;margin-bottom:32px;max-width:440px">Yeni bir proje fikriniz mi var? Aşağıdaki kanallardan bana ulaşabilirsiniz.</p>
+        <div class="contact-links reveal">
+          <a href="mailto:email@example.com" class="contact-link">
+            <div class="c-icon">✉️</div>
+            <div><span class="c-label">E-posta</span><span class="c-value">email@example.com</span></div>
+          </a>
+          <a href="https://github.com/" target="_blank" class="contact-link">
+            <div class="c-icon">⌨️</div>
+            <div><span class="c-label">GitHub</span><span class="c-value">github.com/kullaniciadi</span></div>
+          </a>
+          <a href="https://linkedin.com/" target="_blank" class="contact-link">
+            <div class="c-icon">💼</div>
+            <div><span class="c-label">LinkedIn</span><span class="c-value">linkedin.com/in/kullaniciadi</span></div>
+          </a>
+          <a href="https://www.youtube.com/@Campfire_Study" target="_blank" class="contact-link">
+            <div class="c-icon">🎬</div>
+            <div><span class="c-label">YouTube</span><span class="c-value">@Campfire_Study</span></div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-group">
+          <label>Adınız</label>
+          <input type="text" placeholder="Adınız Soyadınız">
+        </div>
+        <div class="form-group">
+          <label>E-posta</label>
+          <input type="email" placeholder="email@ornek.com">
+        </div>
+        <div class="form-group">
+          <label>Mesajınız</label>
+          <textarea placeholder="Projeniz hakkında kısaca bilgi verin..."></textarea>
+        </div>
+        <button class="btn btn-primary" style="margin-top:8px">Mesaj Gönder →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 &mdash; Tüm hakları saklıdır.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav hide on scroll
+  let lastY = 0;
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.style.transform = y > lastY && y > 100 ? 'translateY(-100%)' : 'translateY(0)';
+    lastY = y;
+  });
+</script>
+
+</body>
+</html>
