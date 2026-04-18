@@ -57,7 +57,10 @@ section{padding:100px 40px}
 
 /* WORKS */
 #calismalarim{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+/* Works grid: 2 cols top row, then 3 cols for apps */
 .works-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.works-apps-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;margin-top:28px}
 
 /* YouTube Card */
 .yt-card{display:block;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg);transition:all .45s cubic-bezier(.22,1,.36,1)}
@@ -89,26 +92,47 @@ section{padding:100px 40px}
 .yt-cta{font-size:.85rem;font-weight:600;color:var(--fg);display:inline-flex;align-items:center;gap:6px;transition:gap .3s}
 .yt-card:hover .yt-cta{gap:12px}
 
-/* App Store Card */
-.app-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg);transition:all .45s cubic-bezier(.22,1,.36,1)}
+/* App Cards (App Store) */
+.app-card{display:block;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg);transition:all .45s cubic-bezier(.22,1,.36,1)}
 .app-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.07);border-color:transparent}
-.app-preview{padding-bottom:56.25%;position:relative;overflow:hidden;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 50%,#16213e 100%)}
-.app-preview-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
-.phone-mock{width:80px;height:140px;border-radius:16px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);position:relative;display:flex;align-items:center;justify-content:center}
-.phone-notch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:28px;height:6px;border-radius:4px;background:rgba(255,255,255,.1)}
-.phone-screen{width:56px;height:96px;border-radius:8px;background:linear-gradient(180deg,rgba(99,102,241,.3) 0%,rgba(139,92,246,.2) 100%);display:flex;align-items:center;justify-content:center}
-.phone-screen span{font-size:1.6rem}
-.app-shimmer{position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.03) 50%,transparent 70%);animation:shimmer 3s ease-in-out infinite}
+
+/* App preview banner */
+.app-preview{padding-bottom:52%;position:relative;overflow:hidden}
+.app-preview-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+
+/* PMOZero */
+.app-preview--pmozero{background:linear-gradient(135deg,#0d0d1a 0%,#1a1040 45%,#2d1b6e 100%)}
+.app-preview--pmozero .app-icon-bg{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+/* PoopTracker */
+.app-preview--poop{background:linear-gradient(135deg,#0d1a0d 0%,#0f2e10 45%,#1a4a1c 100%)}
+.app-preview--poop .app-icon-bg{background:linear-gradient(135deg,#22c55e,#16a34a)}
+/* Moneyo */
+.app-preview--moneyo{background:linear-gradient(135deg,#1a1200 0%,#2e2000 45%,#4a3400 100%)}
+.app-preview--moneyo .app-icon-bg{background:linear-gradient(135deg,#f59e0b,#d97706)}
+
+.app-icon-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.app-icon-bg{width:68px;height:68px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:2rem;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.app-icon-name{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+
+/* shimmer overlay */
+.app-shimmer{position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.04) 50%,transparent 70%);animation:shimmer 3s ease-in-out infinite;pointer-events:none}
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-.app-soon-badge{position:absolute;top:16px;right:16px;padding:6px 14px;border-radius:100px;background:rgba(255,255,255,.1);backdrop-filter:blur(12px);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.8)}
-.app-info{padding:24px 28px 28px}
-.app-store-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
-.apple-icon{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--fg);color:var(--bg);font-size:.9rem}
-.app-store-text{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.app-info h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
-.app-info p{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:16px}
-.app-notify{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;border:1.5px dashed var(--line);font-size:.82rem;font-weight:500;color:var(--muted);cursor:default;transition:all .3s}
-.app-notify:hover{border-color:var(--fg);color:var(--fg)}
+
+.app-category-badge{position:absolute;top:14px;right:14px;padding:5px 12px;border-radius:100px;background:rgba(255,255,255,.1);backdrop-filter:blur(12px);font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+
+.app-info{padding:20px 22px 24px}
+.apple-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.apple-icon{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:7px;background:var(--fg);color:var(--bg);font-size:.8rem;flex-shrink:0}
+.app-store-text{font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.app-info h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+.app-info p{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.app-cta{font-size:.82rem;font-weight:600;color:var(--fg);display:inline-flex;align-items:center;gap:6px;transition:gap .3s}
+.app-card:hover .app-cta{gap:12px}
+
+/* Placeholder card (spans 1 col, sits next to YouTube) */
+.placeholder-card{border:1.5px dashed var(--line);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:40px;color:var(--muted);min-height:200px;text-align:center}
+.placeholder-card span{font-size:2rem}
+.placeholder-card p{font-size:.85rem}
 
 /* EXPERIENCE */
 #deneyim{background:var(--bg)}
@@ -147,12 +171,16 @@ footer a{color:var(--fg);text-decoration:none}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
 /* RESPONSIVE */
+@media(max-width:1024px){
+  .works-apps-row{grid-template-columns:1fr 1fr}
+}
 @media(max-width:900px){
   .nav-links{display:none}
   .menu-btn{display:block}
   .hero{padding:120px 24px 60px}
   section{padding:72px 24px}
   .works-grid,.contact-grid{grid-template-columns:1fr;gap:24px}
+  .works-apps-row{grid-template-columns:1fr;gap:24px}
   .hero-decoration{display:none}
   .nav-inner{padding:16px 24px}
 }
@@ -203,6 +231,7 @@ footer a{color:var(--fg);text-decoration:none}
     <p class="section-label reveal">Projeler</p>
     <h2 class="section-title reveal">Çalışmalarım.</h2>
 
+    <!-- Top row: YouTube + placeholder -->
     <div class="works-grid">
 
       <!-- YouTube -->
@@ -243,30 +272,108 @@ footer a{color:var(--fg);text-decoration:none}
         </div>
       </a>
 
-      <!-- App Store Yakında -->
-      <div class="app-card reveal">
-        <div class="app-preview">
+      <!-- Gametric Labs -->
+      <a href="https://gametriclabs.com" target="_blank" class="app-card reveal" style="text-decoration:none;color:var(--fg)">
+        <div class="app-preview" style="background:linear-gradient(135deg,#0a0f1a 0%,#101828 45%,#1a2840 100%);padding-bottom:52%">
           <div class="app-preview-inner">
-            <div class="phone-mock">
-              <div class="phone-notch"></div>
-              <div class="phone-screen"><span>🚀</span></div>
+            <div class="app-icon-wrap">
+              <div class="app-icon-bg" style="background:linear-gradient(135deg,#3b82f6,#6366f1);font-size:2rem;width:68px;height:68px;border-radius:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,.3)">🎮</div>
+              <span class="app-icon-name" style="color:rgba(255,255,255,.45);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase">Gametric Labs</span>
             </div>
           </div>
           <div class="app-shimmer"></div>
-          <div class="app-soon-badge">Yakında</div>
+          <div class="app-category-badge">Studio</div>
         </div>
         <div class="app-info">
-          <div class="app-store-badge">
+          <div class="apple-badge-row">
+            <div class="apple-icon">🎮</div>
+            <span class="app-store-text">Oyun Stüdyosu</span>
+          </div>
+          <h3>Gametric Labs</h3>
+          <p>Oyun ve interaktif deneyimler geliştiren stüdyomuzun web sitesini ziyaret edin.</p>
+          <span class="app-cta">gametriclabs.com →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Bottom row: 3 App Store apps -->
+    <div class="works-apps-row">
+
+      <!-- PMOZero -->
+      <a href="https://apps.apple.com/uz/app/pmozero/id6761995138" target="_blank" class="app-card reveal">
+        <div class="app-preview app-preview--pmozero">
+          <div class="app-preview-inner">
+            <div class="app-icon-wrap">
+              <div class="app-icon-bg">🧠</div>
+              <span class="app-icon-name">PMOZero</span>
+            </div>
+          </div>
+          <div class="app-shimmer"></div>
+          <div class="app-category-badge">Health &amp; Fitness</div>
+        </div>
+        <div class="app-info">
+          <div class="apple-badge-row">
             <div class="apple-icon">
               <svg width="14" height="17" viewBox="0 0 14 17" fill="currentColor"><path d="M13.1 11.8c-.3.7-.5 1-.9 1.6-.6.8-1.4 1.9-2.4 1.9-.9 0-1.2-.6-2.4-.6-1.3 0-1.6.6-2.5.6-1 .1-1.8-1-2.4-1.8C1.1 11.5.4 8.7 1.1 6.8c.5-1.3 1.4-2.2 2.5-2.2 1.1 0 1.8.6 2.7.6.9 0 1.4-.6 2.7-.6.9 0 1.9.5 2.5 1.4-2.2 1.2-1.8 4.3.6 5.1zM9.5 3c.5-.6.8-1.5.7-2.3-.7 0-1.5.5-2 1.1-.4.5-.8 1.4-.7 2.3.8 0 1.5-.5 2-1.1z"/></svg>
             </div>
             <span class="app-store-text">App Store</span>
           </div>
-          <h3>Uygulama Yakında Yayında</h3>
-          <p>Apple App Store'da yayınlanacak uygulamamız son aşamada. Detaylar çok yakında burada paylaşılacak.</p>
-          <div class="app-notify"><span>🔔</span> Haberdar Ol</div>
+          <h3>PMOZero</h3>
+          <p>Break free. One day at a time. Alışkanlıkları kırmak için tasarlanmış sağlık uygulaması.</p>
+          <span class="app-cta">İndir →</span>
         </div>
-      </div>
+      </a>
+
+      <!-- PoopTracker -->
+      <a href="https://apps.apple.com/uz/app/pooptracker-gut-health-ai/id6761611253" target="_blank" class="app-card reveal">
+        <div class="app-preview app-preview--poop">
+          <div class="app-preview-inner">
+            <div class="app-icon-wrap">
+              <div class="app-icon-bg">💩</div>
+              <span class="app-icon-name">PoopTracker</span>
+            </div>
+          </div>
+          <div class="app-shimmer"></div>
+          <div class="app-category-badge">Health &amp; AI</div>
+        </div>
+        <div class="app-info">
+          <div class="apple-badge-row">
+            <div class="apple-icon">
+              <svg width="14" height="17" viewBox="0 0 14 17" fill="currentColor"><path d="M13.1 11.8c-.3.7-.5 1-.9 1.6-.6.8-1.4 1.9-2.4 1.9-.9 0-1.2-.6-2.4-.6-1.3 0-1.6.6-2.5.6-1 .1-1.8-1-2.4-1.8C1.1 11.5.4 8.7 1.1 6.8c.5-1.3 1.4-2.2 2.5-2.2 1.1 0 1.8.6 2.7.6.9 0 1.4-.6 2.7-.6.9 0 1.9.5 2.5 1.4-2.2 1.2-1.8 4.3.6 5.1zM9.5 3c.5-.6.8-1.5.7-2.3-.7 0-1.5.5-2 1.1-.4.5-.8 1.4-.7 2.3.8 0 1.5-.5 2-1.1z"/></svg>
+            </div>
+            <span class="app-store-text">App Store</span>
+          </div>
+          <h3>PoopTracker</h3>
+          <p>AI destekli bağırsak sağlığı takip uygulaması. Gut health verilerinizi analiz edin.</p>
+          <span class="app-cta">İndir →</span>
+        </div>
+      </a>
+
+      <!-- Moneyo -->
+      <a href="https://apps.apple.com/uz/app/moneyo/id6760960872" target="_blank" class="app-card reveal">
+        <div class="app-preview app-preview--moneyo">
+          <div class="app-preview-inner">
+            <div class="app-icon-wrap">
+              <div class="app-icon-bg">💰</div>
+              <span class="app-icon-name">Moneyo</span>
+            </div>
+          </div>
+          <div class="app-shimmer"></div>
+          <div class="app-category-badge">Finance</div>
+        </div>
+        <div class="app-info">
+          <div class="apple-badge-row">
+            <div class="apple-icon">
+              <svg width="14" height="17" viewBox="0 0 14 17" fill="currentColor"><path d="M13.1 11.8c-.3.7-.5 1-.9 1.6-.6.8-1.4 1.9-2.4 1.9-.9 0-1.2-.6-2.4-.6-1.3 0-1.6.6-2.5.6-1 .1-1.8-1-2.4-1.8C1.1 11.5.4 8.7 1.1 6.8c.5-1.3 1.4-2.2 2.5-2.2 1.1 0 1.8.6 2.7.6.9 0 1.4-.6 2.7-.6.9 0 1.9.5 2.5 1.4-2.2 1.2-1.8 4.3.6 5.1zM9.5 3c.5-.6.8-1.5.7-2.3-.7 0-1.5.5-2 1.1-.4.5-.8 1.4-.7 2.3.8 0 1.5-.5 2-1.1z"/></svg>
+            </div>
+            <span class="app-store-text">App Store</span>
+          </div>
+          <h3>Moneyo</h3>
+          <p>Kişisel finans takip uygulaması. Harcamalarınızı kontrol altına alın, bütçenizi yönetin.</p>
+          <span class="app-cta">İndir →</span>
+        </div>
+      </a>
 
     </div>
   </div>
